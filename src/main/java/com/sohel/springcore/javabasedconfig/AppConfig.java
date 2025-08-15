@@ -1,14 +1,32 @@
 package com.sohel.springcore.javabasedconfig;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.*;
 
 @Configuration
+@ComponentScan(basePackages = {"com.sohel.springcore.*"})
 public class AppConfig {
     // @Bean(name = {"employee", "employee1"})
     @Bean
-    public Employee employee() {
-        return new Employee();
+    @Lazy
+    @Scope(value = "prototype")
+    public Employee employee(@Qualifier("dependent1") Dependent dependent) {
+        return new Employee(dependent);
     }
+
+    @Bean
+    @Primary
+    @Scope(value = "prototype")
+    public Dependent dependent() {
+        return new Dependent();
+    }
+
+    @Bean
+    @Scope(value = "prototype")
+    public Dependent dependent1() {
+        return new Dependent();
+    }
+
 }
