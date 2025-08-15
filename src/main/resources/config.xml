@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="employee1" class="com.sohel.springcore.Employee">
+        <property name="id" value="1"/>
+        <property name="name" value="John"/>
+        <property name="tasks">
+            <list>
+                <value>Taks1</value>
+                <value>Task2</value>
+                <value>Task3</value>
+            </list>
+        </property>
+        <property name="skills">
+            <set>
+                <value>Java</value>
+                <value>Python</value>
+                <value>Spring Boot</value>
+            </set>
+        </property>
+        <property name="benefits">
+            <map>
+                <entry key="Benefit1" value="true"/>
+                <entry key="Benefit2" value="false"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="employee2" class="com.sohel.springcore.Employee" p:id="2" p:name="Alice" />
+
+    <bean id="scores" class="com.sohel.springcore.refTypes.Scores" primary="true"> <!-- For autowire="byType" when we have two beans of same type -->
+        <property name="maths" value="94" />
+        <property name="physics" value="79" />
+        <property name="chemistry" value="75" />
+    </bean>
+
+    <bean id="scores1" class="com.sohel.springcore.refTypes.Scores">
+        <property name="maths" value="94" />
+        <property name="physics" value="79" />
+        <property name="chemistry" value="75" />
+    </bean>
+
+    <bean id="student" class="com.sohel.springcore.refTypes.Student">
+        <property name="id" value="1" />
+        <property name="name" value="John" />
+        <property name="scores" ref="scores" />
+    </bean>
+
+    <bean id="student1" class="com.sohel.springcore.refTypes.Student">
+        <constructor-arg name="id" value="2" />
+        <constructor-arg name="name" value="Alice" />
+        <constructor-arg name="scores" ref="scores" />
+    </bean>
+
+    <bean name="student2" class="com.sohel.springcore.refTypes.Student"
+          p:id = "3" p:name = "Bob" autowire="byType" lazy-init="true" />
+
+    <bean name="student3" class="com.sohel.springcore.refTypes.Student"
+          p:id = "3" p:name = "Bob" autowire="byName" />
+
+    <context:component-scan base-package="com.sohel.springcore.*" />
+
+    <context:annotation-config/>
+
+</beans>
