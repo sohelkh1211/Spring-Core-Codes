@@ -3,6 +3,7 @@ package com.sohel.springcore.javabasedconfig;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.*;
 
+// Configuration class
 @Configuration
 @ComponentScan(basePackages = {"com.sohel.springcore.*"})
 public class AppConfig {
