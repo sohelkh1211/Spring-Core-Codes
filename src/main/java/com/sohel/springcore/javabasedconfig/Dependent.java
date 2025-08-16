@@ -1,6 +1,5 @@
 package com.sohel.springcore.javabasedconfig;
 
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 @Component
